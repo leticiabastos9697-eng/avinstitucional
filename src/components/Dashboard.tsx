@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { Turma } from '../types';
-import { semesterLabel } from '../lib/semester';
+import { parseMesAno } from '../lib/semester';
 import SummaryCard from './SummaryCard';
 import QuestionChart from './QuestionChart';
 import OpenQuestionList from './OpenQuestionList';
@@ -9,6 +9,13 @@ interface Props {
   turmas: Turma[];
   onExport: (turmas: Turma[]) => void;
   onAddTurma: () => void;
+  onDeleteTurma: (id: string) => void;
+}
+
+function monthValue(value: string): number | null {
+  const parsed = parseMesAno(value);
+  if (!parsed) return null;
+  return parsed.year * 12 + (parsed.month - 1);
 }
 
 interface QuestionRef {
@@ -31,23 +38,39 @@ function unionQuestionsInOrder(turmas: Turma[]): QuestionRef[] {
   return result;
 }
 
-const TODOS = 'Todos os períodos';
+export default function Dashboard({ turmas, onExport, onAddTurma, onDeleteTurma }: Props) {
+  const [selectedTurmas, setSelectedTurmas] = useState<Set<string>>(new Set());
+  const [periodoDe, setPeriodoDe] = useState('');
+  const [periodoAte, setPeriodoAte] = useState('');
 
-export default function Dashboard({ turmas, onExport, onAddTurma }: Props) {
-  const [periodo, setPeriodo] = useState(TODOS);
+  function toggleTurma(id: string) {
+    setSelectedTurmas((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
-  const periodos = useMemo(() => {
-    const set = new Set<string>();
-    turmas.forEach((t) => set.add(semesterLabel(t.mesAvaliacao)));
-    return [TODOS, ...Array.from(set).sort()];
-  }, [turmas]);
-
-  const filtered = useMemo(
-    () => (periodo === TODOS ? turmas : turmas.filter((t) => semesterLabel(t.mesAvaliacao) === periodo)),
-    [turmas, periodo]
-  );
+  const filtered = useMemo(() => {
+    const de = monthValue(periodoDe);
+    const ate = monthValue(periodoAte);
+    return turmas.filter((t) => {
+      if (selectedTurmas.size > 0 && !selectedTurmas.has(t.id)) return false;
+      const valor = monthValue(t.mesAvaliacao);
+      if (de !== null && (valor === null || valor < de)) return false;
+      if (ate !== null && (valor === null || valor > ate)) return false;
+      return true;
+    });
+  }, [turmas, selectedTurmas, periodoDe, periodoAte]);
 
   const questions = unionQuestionsInOrder(filtered);
+
+  function handleDelete(id: string, nome: string) {
+    if (window.confirm(`Excluir a importação da turma "${nome}"? Essa ação não pode ser desfeita.`)) {
+      onDeleteTurma(id);
+    }
+  }
 
   return (
     <div className="dashboard">
@@ -59,28 +82,47 @@ export default function Dashboard({ turmas, onExport, onAddTurma }: Props) {
         </div>
       </div>
 
-      {periodos.length > 2 && (
-        <div className="period-filter">
-          {periodos.map((p) => (
-            <button
-              key={p}
-              className={p === periodo ? 'period-filter__btn is-active' : 'period-filter__btn'}
-              onClick={() => setPeriodo(p)}
-              type="button"
-            >
-              {p}
-            </button>
-          ))}
+      <div className="filters-panel">
+        <div className="filter-group">
+          <span className="filter-group__label">Turma</span>
+          <div className="turma-filter">
+            {turmas.map((t) => (
+              <label key={t.id} className="turma-filter__item">
+                <input
+                  type="checkbox"
+                  checked={selectedTurmas.has(t.id)}
+                  onChange={() => toggleTurma(t.id)}
+                />
+                {t.nome}
+              </label>
+            ))}
+          </div>
         </div>
-      )}
+        <div className="filter-group">
+          <span className="filter-group__label">Período da avaliação</span>
+          <div className="period-range">
+            <input
+              placeholder="De (ex: MAR/2026)"
+              value={periodoDe}
+              onChange={(e) => setPeriodoDe(e.target.value)}
+            />
+            <span className="arrow">→</span>
+            <input
+              placeholder="Até (ex: MAR/2027)"
+              value={periodoAte}
+              onChange={(e) => setPeriodoAte(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
 
       {filtered.length === 0 ? (
-        <p className="muted">Nenhuma turma encontrada para este período.</p>
+        <p className="muted">Nenhuma turma encontrada para este filtro.</p>
       ) : (
         <>
           <div className="summary-row">
             {filtered.map((t) => (
-              <SummaryCard key={t.id} turma={t} />
+              <SummaryCard key={t.id} turma={t} onDelete={() => handleDelete(t.id, t.nome)} />
             ))}
           </div>
 

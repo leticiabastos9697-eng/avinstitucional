@@ -1,10 +1,15 @@
 import type { Turma } from '../types';
 import { formatPercent } from '../lib/calc';
 
-export default function SummaryCard({ turma }: { turma: Turma }) {
+export default function SummaryCard({ turma, onDelete }: { turma: Turma; onDelete: () => void }) {
   return (
     <div className="summary-card">
-      <h3>{turma.nome}</h3>
+      <div className="summary-card__header">
+        <h3>{turma.nome}</h3>
+        <button type="button" className="summary-card__delete" onClick={onDelete} title="Excluir esta importação">
+          ✕
+        </button>
+      </div>
       <div className="timeline">
         <span>{turma.inicio}</span>
         <span className="arrow">→</span>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrandHeader from './components/BrandHeader';
 import ImportStep from './components/ImportStep';
 import ClassInfoForm from './components/ClassInfoForm';
@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import type { ParsedQuestion, Turma, TurmaInfo } from './types';
 import { calcAtivos, calcTaxaResposta } from './lib/calc';
 import { exportToPptx } from './lib/exportPptx';
+import { loadTurmas, saveTurmas } from './lib/storage';
 import './App.css';
 
 type Step = 'import' | 'form' | 'dashboard';
@@ -13,9 +14,13 @@ type Step = 'import' | 'form' | 'dashboard';
 const STEP_INDEX: Record<Step, number> = { import: 0, form: 1, dashboard: 2 };
 
 export default function App() {
-  const [step, setStep] = useState<Step>('import');
+  const [turmas, setTurmas] = useState<Turma[]>(() => loadTurmas());
+  const [step, setStep] = useState<Step>(() => (loadTurmas().length > 0 ? 'dashboard' : 'import'));
   const [pending, setPending] = useState<{ respondentes: number; questions: ParsedQuestion[] } | null>(null);
-  const [turmas, setTurmas] = useState<Turma[]>([]);
+
+  useEffect(() => {
+    saveTurmas(turmas);
+  }, [turmas]);
 
   function handleParsed(data: { respondentes: number; questions: ParsedQuestion[]; fileName: string }) {
     setPending({ respondentes: data.respondentes, questions: data.questions });
@@ -37,6 +42,14 @@ export default function App() {
     setTurmas((prev) => [...prev, turma]);
     setPending(null);
     setStep('dashboard');
+  }
+
+  function handleDeleteTurma(id: string) {
+    setTurmas((prev) => {
+      const next = prev.filter((t) => t.id !== id);
+      if (next.length === 0) setStep('import');
+      return next;
+    });
   }
 
   return (
@@ -62,6 +75,7 @@ export default function App() {
           turmas={turmas}
           onExport={exportToPptx}
           onAddTurma={() => setStep('import')}
+          onDeleteTurma={handleDeleteTurma}
         />
       )}
       </main>

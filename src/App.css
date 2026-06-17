@@ -253,31 +253,51 @@ button.secondary:hover {
   margin: 0;
 }
 
-.period-filter {
+.filters-panel {
   display: flex;
-  gap: 8px;
+  gap: 24px;
   flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid #d8dce6;
+  border-radius: 14px;
+  padding: 16px 20px;
   margin-bottom: 24px;
 }
 
-.period-filter__btn {
-  background: #fff;
-  color: var(--navy);
-  border: 1px solid #d8dce6;
-  border-radius: 20px;
-  padding: 8px 16px;
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-group__label {
   font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
 }
 
-.period-filter__btn:hover {
-  filter: none;
-  background: #eef1f7;
+.turma-filter {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-.period-filter__btn.is-active {
-  background: var(--navy);
-  color: #fff;
-  border-color: var(--navy);
+.turma-filter__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.period-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.period-range input {
+  width: 160px;
 }
 
 .summary-row {
@@ -297,10 +317,35 @@ button.secondary:hover {
   min-width: 260px;
 }
 
+.summary-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
 .summary-card h3 {
   margin: 0 0 10px;
   font-size: 17px;
   font-weight: 700;
+}
+
+.summary-card__delete {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.summary-card__delete:hover {
+  filter: none;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .timeline {
