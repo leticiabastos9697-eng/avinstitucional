@@ -17,6 +17,7 @@ export interface TurmaInfo {
   nome: string;
   inicio: string;
   fim: string;
+  mesAvaliacao: string;
   qtdIniciaram: number;
   qtdEvadidos: number;
   qtdTransferidos: number;

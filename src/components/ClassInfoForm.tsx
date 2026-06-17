@@ -11,6 +11,7 @@ const empty: TurmaInfo = {
   nome: '',
   inicio: '',
   fim: '',
+  mesAvaliacao: '',
   qtdIniciaram: 0,
   qtdEvadidos: 0,
   qtdTransferidos: 0,
@@ -46,6 +47,15 @@ export default function ClassInfoForm({ respondentes, onSubmit, onCancel }: Prop
         <label>
           Mês/Ano de Conclusão
           <input required value={info.fim} onChange={(e) => update('fim', e.target.value)} placeholder="Ex: SET/26" />
+        </label>
+        <label>
+          Mês/Ano da Avaliação
+          <input
+            required
+            value={info.mesAvaliacao}
+            onChange={(e) => update('mesAvaliacao', e.target.value)}
+            placeholder="Ex: MAR/2026"
+          />
         </label>
         <label>
           Quantidade de Alunos que Iniciaram

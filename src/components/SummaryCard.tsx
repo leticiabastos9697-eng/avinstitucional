@@ -19,7 +19,7 @@ export default function SummaryCard({ turma }: { turma: Turma }) {
         <div><span className="label">Ativos</span><span className="value">{turma.ativos}</span></div>
       </div>
       <div className="response-rate">
-        {turma.nome} = {turma.respondentes} / {formatPercent(turma.taxaResposta)}
+        {turma.nome} = {turma.respondentes} / {formatPercent(turma.taxaResposta)} ({turma.mesAvaliacao})
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ export default function App() {
       {step === 'dashboard' && turmas.length > 0 && (
         <Dashboard
           turmas={turmas}
-          onExport={() => exportToPptx(turmas)}
+          onExport={exportToPptx}
           onAddTurma={() => setStep('import')}
         />
       )}

@@ -69,7 +69,7 @@ export default function QuestionChart({ questionText, turmas, questionKey }: Pro
       </div>
       <div className="footer-rates">
         {relevant.map((t) => (
-          <span key={t.id}>{t.nome} = {t.respondentes} / {Math.round(t.taxaResposta)}%</span>
+          <span key={t.id}>{t.nome} = {t.respondentes} / {Math.round(t.taxaResposta)}% ({t.mesAvaliacao})</span>
         ))}
       </div>
     </div>

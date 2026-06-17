@@ -253,6 +253,33 @@ button.secondary:hover {
   margin: 0;
 }
 
+.period-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.period-filter__btn {
+  background: #fff;
+  color: var(--navy);
+  border: 1px solid #d8dce6;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.period-filter__btn:hover {
+  filter: none;
+  background: #eef1f7;
+}
+
+.period-filter__btn.is-active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
 .summary-row {
   display: flex;
   gap: 16px;

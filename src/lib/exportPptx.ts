@@ -6,12 +6,12 @@ const NAVY = BRAND.navy.replace('#', '');
 const SLIDE_W = 13.33;
 
 function addFooterRates(slide: pptxgen.Slide, turmas: Turma[]) {
-  const positions: [number, 'left' | 'right'][] = [[0.3, 'left'], [SLIDE_W - 4.3, 'right']];
+  const positions: [number, 'left' | 'right'][] = [[0.3, 'left'], [SLIDE_W - 5.3, 'right']];
   turmas.slice(0, 2).forEach((t, i) => {
-    slide.addText(`${t.nome} = ${t.respondentes} / ${Math.round(t.taxaResposta)}%`, {
+    slide.addText(`${t.nome} = ${t.respondentes} / ${Math.round(t.taxaResposta)}% (${t.mesAvaliacao})`, {
       x: positions[i][0],
       y: 6.9,
-      w: 4,
+      w: 5,
       h: 0.4,
       fontSize: 14,
       bold: true,
@@ -43,6 +43,7 @@ function summarySlide(pptx: pptxgen, turmas: Turma[]) {
     slide.addText(t.nome, { x, y: 0.6, w: colWidth - 1, h: 0.5, bold: true, fontSize: 18, color: NAVY });
     slide.addText(`${t.inicio}  →  ${t.fim}`, { x, y: 1.2, w: colWidth - 1, h: 0.4, fontSize: 14, color: BRAND.blue.replace('#',''), bold: true });
     const lines = [
+      `AVALIAÇÃO: ${t.mesAvaliacao}`,
       `INÍCIO: ${t.qtdIniciaram}`,
       `SAÍDA: ${t.qtdEvadidos}`,
       `TRANSFERÊNCIA: ${t.qtdTransferidos}`,
