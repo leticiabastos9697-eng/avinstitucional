@@ -1,8 +1,8 @@
 import pptxgen from 'pptxgenjs';
 import type { Turma } from '../types';
-import { TURMA_COLORS, sortOptionLabels } from './colors';
+import { BRAND, TURMA_COLORS, sortOptionLabels } from './colors';
 
-const NAVY = '1F3864';
+const NAVY = BRAND.navy.replace('#', '');
 const SLIDE_W = 13.33;
 
 function addFooterRates(slide: pptxgen.Slide, turmas: Turma[]) {
@@ -41,7 +41,7 @@ function summarySlide(pptx: pptxgen, turmas: Turma[]) {
   turmas.forEach((t, i) => {
     const x = i * colWidth + 0.5;
     slide.addText(t.nome, { x, y: 0.6, w: colWidth - 1, h: 0.5, bold: true, fontSize: 18, color: NAVY });
-    slide.addText(`${t.inicio}  →  ${t.fim}`, { x, y: 1.2, w: colWidth - 1, h: 0.4, fontSize: 14, color: '5B9BD5', bold: true });
+    slide.addText(`${t.inicio}  →  ${t.fim}`, { x, y: 1.2, w: colWidth - 1, h: 0.4, fontSize: 14, color: BRAND.blue.replace('#',''), bold: true });
     const lines = [
       `INÍCIO: ${t.qtdIniciaram}`,
       `SAÍDA: ${t.qtdEvadidos}`,
@@ -120,7 +120,7 @@ function openSlides(pptx: pptxgen, questionText: string, key: string, turmas: Tu
       slide.addText(
         [
           { text: `${questionText}\n`, options: { fontSize: 18, bold: true, color: NAVY } },
-          { text: t.nome, options: { fontSize: 14, bold: true, color: '5B9BD5' } },
+          { text: t.nome, options: { fontSize: 14, bold: true, color: BRAND.blue.replace('#','') } },
         ],
         { x: 0.4, y: 0.3, w: SLIDE_W - 0.8, h: 0.9 }
       );

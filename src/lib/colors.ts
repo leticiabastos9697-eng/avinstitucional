@@ -1,4 +1,10 @@
-export const TURMA_COLORS = ['#1F3864', '#ED7D31', '#548235', '#7030A0', '#C00000', '#0F9ED5'];
+export const BRAND = {
+  navy: '#011B5C',
+  blue: '#174290',
+  orange: '#E4650E',
+};
+
+export const TURMA_COLORS = [BRAND.navy, BRAND.orange, BRAND.blue, '#548235', '#7030A0', '#0F9ED5'];
 
 export const CANONICAL_OPTION_ORDER = [
   'Péssimo',

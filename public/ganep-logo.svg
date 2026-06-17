@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <circle cx="256" cy="86" r="54" fill="#174290" />
+  <ellipse cx="256" cy="192" rx="68" ry="42" fill="#174290" />
+
+  <path
+    d="M256,178 C200,150 80,120 40,142 C36,222 36,342 44,392 C70,422 160,450 256,470 Z"
+    fill="#174290"
+  />
+  <path
+    d="M256,178 C312,150 432,120 472,142 C476,222 476,342 468,392 C442,422 352,450 256,470 Z"
+    fill="#174290"
+  />
+
+  <path
+    d="M256,192 C204,168 92,140 58,158"
+    stroke="#ffffff"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+  <path
+    d="M256,192 C308,168 420,140 454,158"
+    stroke="#ffffff"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+
+  <path d="M256,184 L256,462" stroke="#ffffff" stroke-width="9" stroke-linecap="round" />
+</svg>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BrandHeader from './components/BrandHeader';
 import ImportStep from './components/ImportStep';
 import ClassInfoForm from './components/ClassInfoForm';
 import Dashboard from './components/Dashboard';
@@ -8,6 +9,8 @@ import { exportToPptx } from './lib/exportPptx';
 import './App.css';
 
 type Step = 'import' | 'form' | 'dashboard';
+
+const STEP_INDEX: Record<Step, number> = { import: 0, form: 1, dashboard: 2 };
 
 export default function App() {
   const [step, setStep] = useState<Step>('import');
@@ -38,10 +41,9 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Tabulação de Avaliação Institucional</h1>
-      </header>
+      <BrandHeader step={STEP_INDEX[step]} />
 
+      <main className="app-main">
       {step === 'import' && <ImportStep onParsed={handleParsed} />}
 
       {step === 'form' && pending && (
@@ -62,6 +64,7 @@ export default function App() {
           onAddTurma={() => setStep('import')}
         />
       )}
+      </main>
     </div>
   );
 }
