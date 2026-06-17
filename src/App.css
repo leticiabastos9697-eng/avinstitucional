@@ -1,0 +1,200 @@
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  color: #1f3864;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #1f3864;
+}
+
+.muted {
+  color: #666;
+  font-size: 14px;
+}
+
+.error {
+  color: #c00000;
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-grid input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+button {
+  background: #1f3864;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #fff;
+  color: #1f3864;
+  border: 1px solid #1f3864;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header .actions {
+  justify-content: flex-end;
+}
+
+.summary-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.summary-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex: 1;
+  min-width: 240px;
+}
+
+.summary-card h3 {
+  color: #1f3864;
+  margin: 0 0 8px;
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5b9bd5;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stats > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+.stats .label {
+  color: #666;
+}
+
+.stats .value {
+  font-weight: 700;
+  color: #1f3864;
+}
+
+.response-rate {
+  font-weight: 700;
+  color: #1f3864;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.question-block {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.question-block h3 {
+  color: #1f3864;
+  margin-top: 0;
+}
+
+.chart-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.footer-rates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-weight: 700;
+  color: #1f3864;
+  font-size: 14px;
+}
+
+.open-answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.open-answers-col h4 {
+  color: #5b9bd5;
+  margin: 0 0 8px;
+}
+
+.open-answers-col ul {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.open-answers-col li {
+  margin-bottom: 8px;
+}
